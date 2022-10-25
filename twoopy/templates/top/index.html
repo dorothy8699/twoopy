@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  {% load tailwind_tags %}
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+
+    <title>Event Participation Form - Free Bulma Template</title>
+    {% tailwind_css %}
+  </head>
+  <body
+    class="bg-gray-100 text-gray-900 tracking-wider leading-normal font-roboto"
+  >
+    <!--Container-->
+    <div class="container w-full md:w-3/5 xl:w-5/6 mx-auto px-2">
+
+      <div class="text-center m-5">
+        <div class="p-5 inline-block rounded text-5xl font-bold font-ubuntu">
+          <div class="text-gray-900">Twitter Auto-comment Bot</div>
+          <div class="text-[#4141A6]">twitter bot</div>
+        </div>
+      </div>
+
+
+      <form>
+      <div class="intro-y relative mt-5 flex">
+          <input
+            type="text"
+            name="keyword"
+            placeholder="Enter keyword"
+            class="border-[#4141A6] focus:border-[#4141A6] border-2 rounded pl-10"
+            value="{{ keyword }}"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-search text-gray-600 w-5 h-5 absolute inset-y-0 right-0 my-auto mr-3 left-2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+
+          <button
+            class="ml-5 block px-4 py-2 text-white transition duration-100 ease-in-out bg-[#4141A6] border border-transparent rounded shadow-sm hover:bg-[#4141A6] focus:border-[#4141A6] focus:ring-2 focus:ring-[#4141A6] focus:outline-none focus:ring-opacity-50"
+          >
+            Search
+          </button>
+
+         <div class="ml-10 mt-2">
+          <input id="check-all" type="checkbox" value="" class="w-6 h-6 text-[#4141A6] bg-gray-100 rounded border-gray-300 focus:ring-[#4141A6] dark:focus:ring-[#4141A6] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All Items</label>
+        </div>
+
+      </form>
+
+
+        <button
+        id="comment-button"
+        class="ml-5 block px-4 py-2 text-white transition duration-100 ease-in-out bg-[#4141A6] border border-transparent rounded shadow-sm hover:bg-[#4141A6] focus:border-[#4141A6] focus:ring-2 focus:ring-[#4141A6] focus:outline-none focus:ring-opacity-50" type="button" data-modal-toggle="defaultModal">
+        Comment
+        </button>
+
+      <!-- Main modal -->
+      <div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+        <div class="relative p-4 w-3/5 h-3/5 mx-auto top-1/6">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Message to selected Twitter users
+                    </h3>
+                    <button type="button" id="close-modal-button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                    </button>
+                </div>
+                <!-- Modal body -->
+                  {% csrf_token %}
+                <div class="p-6 space-y-6">
+                  <textarea id="comment" rows="4" class="h-80 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#4141A6] focus:border-[#4141A6] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#4141A6] dark:focus:border-[#4141A6]" placeholder="Your message..."></textarea>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button data-modal-toggle="defaultModal" type="button" id="send-comment-button" class="ml-5 block px-4 py-2 text-white transition duration-100 ease-in-out bg-[#4141A6] border border-transparent rounded shadow-sm hover:bg-[#4141A6] focus:border-[#4141A6] focus:ring-2 focus:ring-[#4141A6] focus:outline-none focus:ring-opacity-50">Send</button>
+                    <button data-modal-toggle="defaultModal" type="button" id="cancel-modal-button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-[#4141A6] rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+                <div class="p-6 text-center">
+                    <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Your comment has been sended successfully</h3>
+                    <button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        return
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 mb-10">
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th class="px-6 py-3">user</th>
+              <th class="px-6 py-3">follower</th>
+              <th class="px-6 py-3">favourite</th>
+              <th class="px-6 py-3">id</th>
+              <th class="px-6 py-3">text</th>
+              <th class="px-6 py-3">date</th>
+              <th class="px-6 py-3">check</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for context in contexts %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+              >
+                {{ context.user }}
+              </td>
+              <td class="px-6 py-4">{{ context.follower }}</td>
+              <td class="px-6 py-4">{{ context.favourite }}</td>
+              <td class="px-6 py-4">{{ context.id }}</td>
+              <td class="px-6 py-4">{{ context.text }}</td>
+              <td class="px-6 py-4">{{ context.date }}</td>
+              <td class="px-6 py-4">
+                <input type="checkbox" value={{context.id}} class="checkbox-item w-4 h-4 text-[#4141A6] bg-gray-100 rounded border-gray-300 focus:ring-[#4141A6] dark:focus:ring-[#4141A6] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/container-->
+
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+    ></script>
+
+    <!--Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var table = $("#example")
+          .DataTable({
+            responsive: true,
+          })
+          .columns.adjust()
+          .responsive.recalc();
+
+        $("#comment-button").click(function (){
+          $("#defaultModal").show();
+        });
+        
+        $("#close-modal-button").click(function (){
+          $("#defaultModal").hide();
+        });
+        
+        $("#cancel-modal-button").click(function (){
+          $("#defaultModal").hide();
+        });
+
+        $("#check-all").click(function (){
+          if (this.checked == true) {
+            $(".checkbox-item").prop("checked",true);
+          }
+          else {
+            $(".checkbox-item").prop("checked",false);
+          }
+          });
+      });
+
+      $('#send-comment-button').on('click', function(e) {
+            e.preventDefault();
+            var ids = [];
+            $(".checkbox-item:checked").each(function() {
+              user = $(this).closest("tr").find("td:nth-child(1)").html();
+              id = $(this).closest("tr").find("td:nth-child(4)").html();
+              ids.push({user, id});
+            });
+            var comment = $('#comment').val()
+            $.ajax({
+                'url': 'reply/',
+                'type': 'POST',
+                'data': {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'ids': JSON.stringify(ids),
+                    'comment': comment
+                },
+                'dataType': 'json',
+                success: (data) => {
+                  alert("success");
+                  console.log(data);
+                },
+                error: (error) => {
+                  console.log(error);
+                }
+            })
+      });
+    </script>
+
+  </body>
+</html>
