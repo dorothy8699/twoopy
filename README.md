@@ -1,7 +1,7 @@
 # Twitter Auto-comment Bot
 
 ## Disclaimer
-This code uses the Twitter API to fetch some sweet Twitter data. Just a heads up, you need to follow Twitter's rules and play nice. If you break any of their rules, it's on you, not us! By using this code, you're agreeing to take responsibility for any risks and consequences that may come up. Let's keep it cool and have fun with the Twitter API!
+This code uses the Twitter API to access and retrieve data from Twitter. It is your responsibility to comply with Twitter's terms and conditions and applicable laws and regulations. By using this code, you agree to assume all risks and liabilities associated with the use of the Twitter API.
 
 ## features
 Search for word or phrase related to your services in Twitter. 
